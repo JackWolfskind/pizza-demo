@@ -1,0 +1,508 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Topping {
+  id: ID!
+  name: String!
+  created: DateTime
+  updated: DateTime
+  pizzas(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: PizzaFilter = {}
+
+    """Specify to sort results."""
+    sorting: [PizzaSort!] = []
+  ): ToppingPizzasConnection
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input PizzaFilter {
+  and: [PizzaFilter!]
+  or: [PizzaFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input PizzaSort {
+  field: PizzaSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum PizzaSortFields {
+  id
+  name
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+type Pizza {
+  id: ID!
+  name: String!
+  created: DateTime
+  updated: DateTime
+  toppings(
+    """Limit or page results."""
+    paging: OffsetPaging = {limit: 10}
+
+    """Specify to filter the records returned."""
+    filter: ToppingFilter = {}
+
+    """Specify to sort results."""
+    sorting: [ToppingSort!] = []
+  ): [Topping!]
+}
+
+input OffsetPaging {
+  """Limit the number of records returned"""
+  limit: Int
+
+  """Offset to start returning records from"""
+  offset: Int
+}
+
+input ToppingFilter {
+  and: [ToppingFilter!]
+  or: [ToppingFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input ToppingSort {
+  field: ToppingSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum ToppingSortFields {
+  id
+  name
+}
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+type PizzaDeleteResponse {
+  id: ID
+  name: String
+  created: DateTime
+  updated: DateTime
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+type PizzaEdge {
+  """The node containing the Pizza"""
+  node: Pizza!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type PizzaConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [PizzaEdge!]!
+}
+
+type PizzaCountAggregate {
+  id: Int
+  name: Int
+}
+
+type PizzaSumAggregate {
+  id: Float
+}
+
+type PizzaAvgAggregate {
+  id: Float
+}
+
+type PizzaMinAggregate {
+  id: ID
+  name: String
+}
+
+type PizzaMaxAggregate {
+  id: ID
+  name: String
+}
+
+type ToppingDeleteResponse {
+  id: ID
+  name: String
+  created: DateTime
+  updated: DateTime
+}
+
+type ToppingEdge {
+  """The node containing the Topping"""
+  node: Topping!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+type ToppingConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [ToppingEdge!]!
+}
+
+type ToppingCountAggregate {
+  id: Int
+  name: Int
+}
+
+type ToppingSumAggregate {
+  id: Float
+}
+
+type ToppingAvgAggregate {
+  id: Float
+}
+
+type ToppingMinAggregate {
+  id: ID
+  name: String
+}
+
+type ToppingMaxAggregate {
+  id: ID
+  name: String
+}
+
+type ToppingPizzasConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [PizzaEdge!]!
+}
+
+type Query {
+  pizza(
+    """The id of the record to find."""
+    id: ID!
+  ): Pizza
+  pizzas(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: PizzaFilter = {}
+
+    """Specify to sort results."""
+    sorting: [PizzaSort!] = []
+  ): PizzaConnection!
+  topping(
+    """The id of the record to find."""
+    id: ID!
+  ): Topping
+  toppings(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: ToppingFilter = {}
+
+    """Specify to sort results."""
+    sorting: [ToppingSort!] = []
+  ): ToppingConnection!
+}
+
+type Mutation {
+  addToppingsToPizza(input: RelationsInput!): Pizza!
+  createOnePizza(input: CreateOnePizzaInput!): Pizza!
+  createManyPizzas(input: CreateManyPizzasInput!): [Pizza!]!
+  updateOnePizza(input: UpdateOnePizzaInput!): Pizza!
+  updateManyPizzas(input: UpdateManyPizzasInput!): UpdateManyResponse!
+  deleteOnePizza(input: DeleteOneInput!): PizzaDeleteResponse!
+  deleteManyPizzas(input: DeleteManyPizzasInput!): DeleteManyResponse!
+  createOneTopping(input: CreateOneToppingInput!): Topping!
+  createManyToppings(input: CreateManyToppingsInput!): [Topping!]!
+  updateOneTopping(input: UpdateOneToppingInput!): Topping!
+  updateManyToppings(input: UpdateManyToppingsInput!): UpdateManyResponse!
+  deleteOneTopping(input: DeleteOneInput!): ToppingDeleteResponse!
+  deleteManyToppings(input: DeleteManyToppingsInput!): DeleteManyResponse!
+}
+
+input RelationsInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+input CreateOnePizzaInput {
+  """The record to create"""
+  pizza: CreatePizza!
+}
+
+input CreatePizza {
+  id: ID
+  name: String
+  created: DateTime
+  updated: DateTime
+}
+
+input CreateManyPizzasInput {
+  """Array of records to create"""
+  pizzas: [CreatePizza!]!
+}
+
+input UpdateOnePizzaInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdatePizza!
+}
+
+input UpdatePizza {
+  id: ID
+  name: String
+  created: DateTime
+  updated: DateTime
+}
+
+input UpdateManyPizzasInput {
+  """Filter used to find fields to update"""
+  filter: PizzaUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdatePizza!
+}
+
+input PizzaUpdateFilter {
+  and: [PizzaUpdateFilter!]
+  or: [PizzaUpdateFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input DeleteOneInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input DeleteManyPizzasInput {
+  """Filter to find records to delete"""
+  filter: PizzaDeleteFilter!
+}
+
+input PizzaDeleteFilter {
+  and: [PizzaDeleteFilter!]
+  or: [PizzaDeleteFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input CreateOneToppingInput {
+  """The record to create"""
+  topping: CreateTopping!
+}
+
+input CreateTopping {
+  id: ID
+  name: String
+  created: DateTime
+  updated: DateTime
+}
+
+input CreateManyToppingsInput {
+  """Array of records to create"""
+  toppings: [CreateTopping!]!
+}
+
+input UpdateOneToppingInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateTopping!
+}
+
+input UpdateTopping {
+  id: ID
+  name: String
+  created: DateTime
+  updated: DateTime
+}
+
+input UpdateManyToppingsInput {
+  """Filter used to find fields to update"""
+  filter: ToppingUpdateFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateTopping!
+}
+
+input ToppingUpdateFilter {
+  and: [ToppingUpdateFilter!]
+  or: [ToppingUpdateFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input DeleteManyToppingsInput {
+  """Filter to find records to delete"""
+  filter: ToppingDeleteFilter!
+}
+
+input ToppingDeleteFilter {
+  and: [ToppingDeleteFilter!]
+  or: [ToppingDeleteFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+type Subscription {
+  createdPizza(input: CreatePizzaSubscriptionFilterInput): Pizza!
+  updatedOnePizza(input: UpdateOnePizzaSubscriptionFilterInput): Pizza!
+  updatedManyPizzas: UpdateManyResponse!
+  deletedOnePizza(input: DeleteOnePizzaSubscriptionFilterInput): PizzaDeleteResponse!
+  deletedManyPizzas: DeleteManyResponse!
+  createdTopping(input: CreateToppingSubscriptionFilterInput): Topping!
+  updatedOneTopping(input: UpdateOneToppingSubscriptionFilterInput): Topping!
+  updatedManyToppings: UpdateManyResponse!
+  deletedOneTopping(input: DeleteOneToppingSubscriptionFilterInput): ToppingDeleteResponse!
+  deletedManyToppings: DeleteManyResponse!
+}
+
+input CreatePizzaSubscriptionFilterInput {
+  """Specify to filter the records returned."""
+  filter: PizzaSubscriptionFilter!
+}
+
+input PizzaSubscriptionFilter {
+  and: [PizzaSubscriptionFilter!]
+  or: [PizzaSubscriptionFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input UpdateOnePizzaSubscriptionFilterInput {
+  """Specify to filter the records returned."""
+  filter: PizzaSubscriptionFilter!
+}
+
+input DeleteOnePizzaSubscriptionFilterInput {
+  """Specify to filter the records returned."""
+  filter: PizzaSubscriptionFilter!
+}
+
+input CreateToppingSubscriptionFilterInput {
+  """Specify to filter the records returned."""
+  filter: ToppingSubscriptionFilter!
+}
+
+input ToppingSubscriptionFilter {
+  and: [ToppingSubscriptionFilter!]
+  or: [ToppingSubscriptionFilter!]
+  id: IDFilterComparison
+  name: StringFieldComparison
+}
+
+input UpdateOneToppingSubscriptionFilterInput {
+  """Specify to filter the records returned."""
+  filter: ToppingSubscriptionFilter!
+}
+
+input DeleteOneToppingSubscriptionFilterInput {
+  """Specify to filter the records returned."""
+  filter: ToppingSubscriptionFilter!
+}

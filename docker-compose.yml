@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  # only needed if using mongoose
+  mongo:
+    image: "mongo:4.4"
+    environment:
+      MONGO_INITDB_ROOT_DATABASE: ${DATABASE_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    restart: always
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
